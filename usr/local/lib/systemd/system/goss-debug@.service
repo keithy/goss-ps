@@ -1,0 +1,23 @@
+[Unit]
+Description=Go Server Spec Per Connection Service
+#Use via: nc --recv-only localhost 1111
+
+[Service]
+Type=exec
+#/etc access to /etc/passwd /etc/groups etc.
+#/boot access to check on kernels 
+BindReadOnlyPaths=/:/host:norbind /etc /boot
+ConfigurationDirectory=goss
+
+Environment=GOSS_FILE=/etc/goss/goss.yaml
+Environment=GOSS_FMT=documentation
+EnvironmentFile=-/etc/goss/goss.env
+ExecStartPre=which env
+ExecStartPre=env
+ExecStartPre=which file
+ExecStartPre=file /usr/local/bin/goss
+ExecStart=/usr/local/bin/goss validate
+StandardInput=socket
+
+[Install]
+WantedBy=multi-user.target
