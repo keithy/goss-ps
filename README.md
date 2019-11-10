@@ -3,8 +3,7 @@
 
 # Go Server Spec - deploy as a Systemd Portable Service
 
-(see /etc/os-release for systems this is packaged for and if yours is not listed
-check/contribute other branches)
+see /etc/os-release for systems this is packaged for - check/contribute other branches
 
 This installs as a systemd portable service and prefers a trusted profile.
 

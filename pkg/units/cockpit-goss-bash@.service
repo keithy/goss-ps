@@ -1,0 +1,27 @@
+[Unit]
+Description=Go Server Spec Per Connection Service
+#Use via: nc --recv-only localhost 1111
+
+[Service]
+#/etc access to /etc/passwd /etc/groups
+#/boot access to check on kernels
+BindReadOnlyPaths=/:/host:norbind /boot
+
+ConfigurationDirectory=goss
+Type=exec
+# rw access for goss add
+#BindPaths=/etc/goss
+
+Environment=GOSS_FILE=/etc/goss/goss.yaml
+Environment=GOSS_FMT=documentation
+Environment=HOME=/etc/goss
+Environment=PS1='PS(goss)\w>'
+ExecStartPre=echo XDG_CONFIG_HOME ${XDG_CONFIG_HOME}
+ExecStartPre=echo CONFIGURATION_DIRECTORY ${CONFIGURATION_DIRECTORY}
+ExecStartPre=which bash
+ExecStart=bash -i
+#ExecStart=sshd -i
+StandardInput=socket
+
+[Install]
+WantedBy=multi-user.target

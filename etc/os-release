@@ -1,11 +1,1 @@
-# Portable Service is very dependent upon the OS that it is installed in
-TARGET_OS=Fedora31
-TARGET_OS_VERIFIED=Fedora31
-NAME=NoOS
-VERSION="0"
-ID=noos
-PRETTY_NAME="No OS"
-WEBSITE_URL="https://github.com/keithy/portable-goss"
-WEBSITE_URL2="https://goss.rocks"
-WEBSITE_URL3="https://github.com/SimonBaeumer/goss"
-PORTABLE_PRETTY_NAME="Go Server Spec Portable Service"
+../pkg/etc/os-release
