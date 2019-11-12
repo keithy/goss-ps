@@ -1,9 +1,0 @@
-[Unit]
-Description=Bash on localhost:1112 (in goss context)
-
-[Socket]
-ListenStream=127.0.0.1:1112
-Accept=yes
-
-[Install]
-WantedBy=sockets.target
