@@ -1,9 +1,0 @@
-[Unit]
-Description=Go Server Spec stdout socket
-
-[Socket]
-ListenStream=1111
-Accept=yes
-
-[Install]
-WantedBy=sockets.target

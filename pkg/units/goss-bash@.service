@@ -1,26 +1,30 @@
 [Unit]
-Description=Go Server Spec Per Connection Service
-#Use via: nc --recv-only localhost 1111
+Description=exec shell into portable_goss chroot
+#Use via: nc --recv-only localhost 1112
 
 [Service]
 #/etc access to /etc/passwd /etc/groups
 #/boot access to check on kernels
-BindReadOnlyPaths=/:/host:norbind /boot
-BindPaths=/etc
-
+BindReadOnlyPaths=/:/host /etc /boot 
+#/var is available ro via /host/var 
+#/var is available rw via /var - an example of a very permissive setup
+#either bind here or symlink in dir
+#BindPaths=/var/home:/home /var/roothome:/root 
+BindPaths=/var
 ConfigurationDirectory=goss
 Type=exec
-# rw access for goss add
-#BindPaths=/etc/goss
 
 Environment=GOSS_FILE=/etc/goss/goss.yaml
 Environment=GOSS_FMT=documentation
 Environment=HOME=/etc/goss
 Environment=PS1='PS(goss)\w>'
+EnvironmentFile=-/etc/goss/portable.conf
 ExecStartPre=echo XDG_CONFIG_HOME ${XDG_CONFIG_HOME}
 ExecStartPre=echo CONFIGURATION_DIRECTORY ${CONFIGURATION_DIRECTORY}
 ExecStartPre=which bash
-ExecStart=bash -i
+ExecStart=bash -i -l
+#nc -v -l -p 1112 -e /bin/bash
+#screen //telnet localhost 1112
 #ExecStart=sshd -i
 StandardInput=socket
 

@@ -1,8 +1,9 @@
 [Unit]
 Description=Go Server Spec stdout socket - debug
+#Use via: nc --recv-only localhost 1113
 
 [Socket]
-ListenStream=127.0.0.1:1111
+ListenStream=127.0.0.1:1113
 Accept=yes
 
 [Install]

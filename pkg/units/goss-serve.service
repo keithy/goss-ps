@@ -7,8 +7,8 @@ Wants=network-online.target
 [Service]
 #/etc access to /etc/passwd /etc/groups etc.
 #/boot access to check on kernels 
-BindReadOnlyPaths=/:/host:norbind /etc /boot
-BindPaths=/etc/goss
+BindReadOnlyPaths=/:/host /etc /boot
+BindPaths=/var
 ConfigurationDirectory=goss
 
 Environment=GOSS_FILE=/etc/goss/goss.yaml
@@ -22,9 +22,9 @@ Environment=GOSS_FMT=nagios
 #Environment=GOSS_CACHE=5
 #Environment=GOSS_MAX_CONCURRENT=50
 Environment=GOSS_LISTEN=:1111
-
-EnvironmentFile=-/etc/goss/goss.env
+EnvironmentFile=-/etc/goss/portable.conf
 Type=exec
+User=goss
 ExecStart=/usr/local/bin/goss serve
 
 [Install]

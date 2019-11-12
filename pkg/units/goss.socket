@@ -2,7 +2,7 @@
 Description=Go Server Spec stdout socket
 
 [Socket]
-ListenStream=1111
+ListenStream=111
 Accept=yes
 
 [Install]
